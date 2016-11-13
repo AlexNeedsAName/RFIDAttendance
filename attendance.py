@@ -14,7 +14,6 @@ with open("config.yml", 'r') as config:
 		configData = yaml.safe_load(config)
 	except yaml.YAMLError as e:
 		sys.stdout.write("Failed to parse config file.\n")
-		print e
 		sys.exit(1)
 
 setupForm = configData["registration"]["form"]
@@ -25,7 +24,10 @@ attendanceForm = configData["attendance"]["form"]
 attendanceID   = configData["attendance"]["id"]
 
 #Connect to Arduino
-ports = glob.glob("/dev/tty.usbmodem*")
+if sys.platform.startswith('win'):
+	ports = ['COM%s' % (i + 1) for i in range(256)]
+else:
+	ports = glob.glob("/dev/tty.usbmodem*")
 connected = False
 for port in ports:
 	if(not connected):
