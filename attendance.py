@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, csv, argparse, datetime
+import sys,  argparse, datetime
 import arduino, database, forms
 
 configFile = "config.yml"
