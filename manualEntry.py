@@ -6,8 +6,13 @@ configFile = "config.yml"
 attendance = forms.form(configFile, "attendance")
 
 clear = "clear"
+backspace = 127
+enter = 13
+interrupt = 3
+space = 32
 if(os.name == "nt"): #If Windows
     clear = "cls"
+    backspace = 8
 
 input = ""
 
@@ -18,12 +23,12 @@ while True:
     inputChar = str(getch.getch())
     os.system(clear)
     print("Manual Entry:\n")
-    if(inputChar.isalpha() or ord(inputChar) == 32):
+    if(inputChar.isalpha() or ord(inputChar) == space):
         input+=str(inputChar)
         print(input)
         matches = database.checkForMatches(input)
 
-    elif(ord(inputChar) == 127): #Backspace
+    elif(ord(inputChar) == backspace): #Backspace
         input = input[:-1]
         print(input)
         if(input!=""):
@@ -31,11 +36,11 @@ while True:
         else:
             matches = []
 
-    elif(ord(inputChar) == 13): #Enter
+    elif(ord(inputChar) == enter): #Enter
 	print(input)
 	matches = database.checkForMatches(input)
 
-    elif(ord(inputChar) == 3): #Keyboard Interrupt
+    elif(ord(inputChar) == interrupt): #Keyboard Interrupt
         break
 
     elif(inputChar.isdigit()):

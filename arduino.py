@@ -11,6 +11,8 @@ class arduino:
 			return 0
 		if sys.platform.startswith('win'):
 			ports = ['COM%s' % (i + 1) for i in range(256)]
+		elif sys.platform.startswith('linux'):
+			ports = glob.glob("/dev/ttyACM*")
 		else:
 		        ports = glob.glob("/dev/tty.usbmodem*")
 	
