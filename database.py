@@ -54,6 +54,7 @@ def registerID(id):
 
 	with open("database.csv", 'a') as outFile:
 		outFile.write("\n\""+ id + "\",\"" + name + "\"")
+	return name
 
 def markOffline(id):
 	with open(day+".csv", 'a') as outFile:
